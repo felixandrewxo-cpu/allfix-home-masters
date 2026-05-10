@@ -60,7 +60,16 @@ export function Services() {
                 <h3 className="mt-5 text-xl font-semibold">{s.title}</h3>
                 <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{s.desc}</p>
                 <div className="mt-5 flex items-center gap-2 text-sm font-semibold text-brand opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all">
-                  <a href="#booking">Book this service →</a>
+                  <a
+                    href="#booking"
+                    onClick={() => {
+                      window.dispatchEvent(
+                        new CustomEvent("prefill-service", { detail: s.title }),
+                      );
+                    }}
+                  >
+                    Book this service →
+                  </a>
                 </div>
               </div>
             </div>
