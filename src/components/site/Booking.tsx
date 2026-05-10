@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { z } from "zod";
 import { Calendar, CheckCircle2, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -49,6 +49,26 @@ export function Booking() {
     address: "",
     message: "",
   });
+
+  useEffect(() => {
+    const onPrefill = (e: Event) => {
+      const detail = (e as CustomEvent<string>).detail;
+      if (!detail) return;
+      const match =
+        services.find((s) => s.toLowerCase() === detail.toLowerCase()) ||
+        services.find((s) => s.toLowerCase().startsWith(detail.toLowerCase().split(/[\s/]/)[0])) ||
+        services.find((s) => s.toLowerCase().includes(detail.toLowerCase().split(" ")[0]));
+      if (match) {
+        setForm((f) => ({ ...f, service: match }));
+        setDone(false);
+        setTimeout(() => {
+          document.getElementById("booking")?.scrollIntoView({ behavior: "smooth" });
+        }, 50);
+      }
+    };
+    window.addEventListener("prefill-service", onPrefill as EventListener);
+    return () => window.removeEventListener("prefill-service", onPrefill as EventListener);
+  }, []);
 
   const update = (k: keyof typeof form) => (e: { target: { value: string } } | string) => {
     const value = typeof e === "string" ? e : e.target.value;

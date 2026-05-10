@@ -1,11 +1,13 @@
 import { ArrowRight, CheckCircle2, Phone, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Particles } from "@/components/site/Particles";
 import logo from "@/assets/logo.png";
 
 export function Hero() {
   return (
     <section id="top" className="relative pt-32 pb-24 lg:pt-40 lg:pb-32 overflow-hidden bg-hero-gradient text-ink-foreground">
       <div className="absolute inset-0 bg-grid opacity-40" />
+      <Particles count={28} />
       <div className="absolute -top-32 -right-32 h-96 w-96 rounded-full bg-brand/30 blur-3xl animate-float" />
       <div className="absolute -bottom-32 -left-32 h-96 w-96 rounded-full bg-brand/20 blur-3xl animate-float" style={{ animationDelay: "2s" }} />
 
