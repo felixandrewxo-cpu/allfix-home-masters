@@ -49,12 +49,12 @@ export function Header() {
           : "bg-gradient-to-b from-black/40 to-transparent backdrop-blur-sm"
       }`}
     >
-      <div className="container mx-auto px-4 lg:px-8 flex items-center justify-between h-20">
+      <div className="container mx-auto px-4 lg:px-8 flex items-center justify-between h-24">
         <a href="#top" className="flex items-center gap-3 group">
           <img
             src={logo}
             alt="AllFix Maintenance Services Logo"
-            className="h-14 w-auto transition-transform duration-300 group-hover:scale-105"
+            className="h-20 w-auto transition-transform duration-300 group-hover:scale-105"
           />
           <span className="hidden sm:flex flex-col leading-tight">
             <span className={`font-display font-extrabold text-lg tracking-tight ${nameClr}`}>
