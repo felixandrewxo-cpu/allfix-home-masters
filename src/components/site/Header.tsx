@@ -49,7 +49,7 @@ export function Header() {
           : "bg-gradient-to-b from-black/40 to-transparent backdrop-blur-sm"
       }`}
     >
-      <div className="container mx-auto px-4 lg:px-8 flex items-center justify-between h-24">
+      <div className="container mx-auto px-4 lg:px-8 flex items-center justify-between h-28">
         <a href="#top" className="flex items-center gap-3 group">
           <img
             src={logo}
