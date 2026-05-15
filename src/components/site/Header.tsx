@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
-import { Menu, Phone, X } from "lucide-react";
+import { Menu, Phone, ShoppingCart, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import logo from "@/assets/logo.png";
+import { useCart } from "./cart/CartContext";
 
 const links = [
   { href: "#services", label: "Services" },
+  { href: "#catalog", label: "Order Cleaning" },
   { href: "#about", label: "About" },
   { href: "#reviews", label: "Reviews" },
   { href: "#booking", label: "Book Now" },
