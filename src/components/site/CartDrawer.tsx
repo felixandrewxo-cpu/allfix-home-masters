@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { ShoppingCart, Plus, Minus, Trash2, MessageCircle } from "lucide-react";
-import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
+import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -8,7 +8,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
 import { useCart } from "./cart/CartContext";
 
-export function CartDrawer({ trigger }: { trigger: React.ReactNode }) {
+export function CartDrawer() {
   const { items, count, total, originalTotal, isOpen, setOpen, inc, dec, remove, clear } = useCart();
   const [step, setStep] = useState<"cart" | "checkout">("cart");
   const [info, setInfo] = useState({ name: "", phone: "", address: "", date: "", notes: "" });
@@ -38,7 +38,6 @@ export function CartDrawer({ trigger }: { trigger: React.ReactNode }) {
 
   return (
     <Sheet open={isOpen} onOpenChange={setOpen}>
-      <SheetTrigger asChild>{trigger}</SheetTrigger>
       <SheetContent className="w-full sm:max-w-md flex flex-col p-0 gap-0">
         <SheetHeader className="px-5 py-4 border-b">
           <SheetTitle className="flex items-center gap-2">
