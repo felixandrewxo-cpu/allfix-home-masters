@@ -8,6 +8,9 @@ import { Booking } from "@/components/site/Booking";
 import { Contact } from "@/components/site/Contact";
 import { Footer } from "@/components/site/Footer";
 import { FloatingCTA } from "@/components/site/FloatingCTA";
+import { CleaningCatalog } from "@/components/site/CleaningCatalog";
+import { CartProvider } from "@/components/site/cart/CartContext";
+import { CartDrawer } from "@/components/site/CartDrawer";
 import { Toaster } from "@/components/ui/sonner";
 
 export const Route = createFileRoute("/")({
@@ -33,19 +36,23 @@ export const Route = createFileRoute("/")({
 
 function Index() {
   return (
-    <div className="min-h-screen bg-background">
-      <Header />
-      <main>
-        <Hero />
-        <Services />
-        <About />
-        <Reviews />
-        <Booking />
-        <Contact />
-      </main>
-      <Footer />
-      <FloatingCTA />
-      <Toaster richColors position="top-center" />
-    </div>
+    <CartProvider>
+      <div className="min-h-screen bg-background">
+        <Header />
+        <main>
+          <Hero />
+          <Services />
+          <CleaningCatalog />
+          <About />
+          <Reviews />
+          <Booking />
+          <Contact />
+        </main>
+        <Footer />
+        <FloatingCTA />
+        <CartDrawer />
+        <Toaster richColors position="top-center" />
+      </div>
+    </CartProvider>
   );
 }

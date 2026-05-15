@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
-import { Menu, Phone, X } from "lucide-react";
+import { Menu, Phone, ShoppingCart, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import logo from "@/assets/logo.png";
+import { useCart } from "./cart/CartContext";
 
 const links = [
   { href: "#services", label: "Services" },
+  { href: "#catalog", label: "Order Cleaning" },
   { href: "#about", label: "About" },
   { href: "#reviews", label: "Reviews" },
   { href: "#booking", label: "Book Now" },
@@ -15,11 +17,12 @@ export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState<string>("#top");
+  const { count, setOpen: setCartOpen } = useCart();
 
   useEffect(() => {
     const onScroll = () => {
       setScrolled(window.scrollY > 16);
-      const sections = ["#services", "#about", "#reviews", "#booking", "#contact"];
+      const sections = ["#services", "#catalog", "#about", "#reviews", "#booking", "#contact"];
       const y = window.scrollY + 120;
       let current = "#top";
       for (const id of sections) {
@@ -93,6 +96,7 @@ export function Header() {
             <Phone className="h-4 w-4" />
             0325 5333222
           </a>
+          <CartIconButton scrolled={scrolled} count={count} onClick={() => setCartOpen(true)} />
           <Button
             asChild
             className="btn-shine bg-brand hover:bg-brand text-brand-foreground font-semibold rounded-full px-6 shadow-glow hover:scale-105 transition-transform"
@@ -101,15 +105,18 @@ export function Header() {
           </Button>
         </div>
 
-        <button
-          aria-label="Toggle menu"
-          className={`lg:hidden p-2 rounded-md transition ${
-            scrolled ? "text-foreground hover:bg-muted" : "text-white hover:bg-white/10"
-          }`}
-          onClick={() => setOpen((o) => !o)}
-        >
-          {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-        </button>
+        <div className="lg:hidden flex items-center gap-1">
+          <CartIconButton scrolled={scrolled} count={count} onClick={() => setCartOpen(true)} />
+          <button
+            aria-label="Toggle menu"
+            className={`p-2 rounded-md transition ${
+              scrolled ? "text-foreground hover:bg-muted" : "text-white hover:bg-white/10"
+            }`}
+            onClick={() => setOpen((o) => !o)}
+          >
+            {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          </button>
+        </div>
       </div>
 
       {open && (
@@ -134,5 +141,24 @@ export function Header() {
         </div>
       )}
     </header>
+  );
+}
+
+function CartIconButton({ scrolled, count, onClick }: { scrolled: boolean; count: number; onClick: () => void }) {
+  return (
+    <button
+      onClick={onClick}
+      aria-label="Open cart"
+      className={`relative inline-flex items-center justify-center h-10 w-10 rounded-full transition ${
+        scrolled ? "text-foreground hover:bg-muted" : "text-white hover:bg-white/10 drop-shadow-[0_1px_3px_rgba(0,0,0,0.5)]"
+      }`}
+    >
+      <ShoppingCart className="h-5 w-5" />
+      {count > 0 && (
+        <span className="absolute -top-0.5 -right-0.5 h-5 min-w-5 px-1 rounded-full bg-brand text-brand-foreground text-[11px] font-bold grid place-items-center animate-fade-in shadow-glow">
+          {count}
+        </span>
+      )}
+    </button>
   );
 }
