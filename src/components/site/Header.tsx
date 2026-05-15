@@ -17,11 +17,12 @@ export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState<string>("#top");
+  const { count, setOpen: setCartOpen } = useCart();
 
   useEffect(() => {
     const onScroll = () => {
       setScrolled(window.scrollY > 16);
-      const sections = ["#services", "#about", "#reviews", "#booking", "#contact"];
+      const sections = ["#services", "#catalog", "#about", "#reviews", "#booking", "#contact"];
       const y = window.scrollY + 120;
       let current = "#top";
       for (const id of sections) {
