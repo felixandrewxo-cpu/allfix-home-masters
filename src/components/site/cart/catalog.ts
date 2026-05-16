@@ -12,8 +12,19 @@ export type Category = {
   id: string;
   name: string;
   blurb: string;
+  image: string;
   items: CatalogItem[];
 };
+
+import sofaImg from "@/assets/catalog/sofa.jpg";
+import chairImg from "@/assets/catalog/chair.jpg";
+import carpetImg from "@/assets/catalog/carpet.jpg";
+import curtainImg from "@/assets/catalog/curtain.jpg";
+import mattressImg from "@/assets/catalog/mattress.jpg";
+import plasticTankImg from "@/assets/catalog/plastic-tank.jpg";
+import cementTankImg from "@/assets/catalog/cement-tank.jpg";
+import deepImg from "@/assets/catalog/deep.jpg";
+import solarImg from "@/assets/catalog/solar.jpg";
 
 const r = (min = 4.3, max = 4.9) =>
   Math.round((min + Math.random() * (max - min)) * 10) / 10;
