@@ -97,32 +97,37 @@ export function CleaningCatalog() {
           </p>
         </div>
 
-        <div className="flex gap-3 overflow-x-auto pb-3 mb-10 -mx-4 px-4 lg:justify-center scrollbar-thin">
-          {catalog.map((c) => (
-            <button
-              key={c.id}
-              onClick={() => setActiveId(c.id)}
-              className={`group/tab relative shrink-0 overflow-hidden rounded-2xl border transition-all ${
-                activeId === c.id
-                  ? "border-brand shadow-glow scale-[1.03]"
-                  : "border-border hover:border-brand/40"
-              }`}
-            >
-              <div className="flex items-center gap-3 pr-4">
-                <div className="h-14 w-14 overflow-hidden bg-muted">
-                  <img
-                    src={c.image}
-                    alt={c.name}
-                    loading="lazy"
-                    className="h-full w-full object-cover transition-transform duration-500 group-hover/tab:scale-110"
-                  />
+        <div className="-mx-4 lg:mx-0 mb-10">
+          <div
+            className="flex gap-3 overflow-x-auto px-4 lg:px-1 py-2 scrollbar-thin snap-x snap-mandatory lg:flex-wrap lg:justify-center lg:overflow-visible"
+            style={{ scrollPaddingLeft: "1rem", scrollPaddingRight: "1rem" }}
+          >
+            {catalog.map((c) => (
+              <button
+                key={c.id}
+                onClick={() => setActiveId(c.id)}
+                className={`group/tab relative shrink-0 snap-start overflow-hidden rounded-2xl border transition-all ${
+                  activeId === c.id
+                    ? "border-brand shadow-glow scale-[1.02]"
+                    : "border-border hover:border-brand/40"
+                }`}
+              >
+                <div className="flex items-center gap-3 pr-4">
+                  <div className="h-14 w-14 shrink-0 overflow-hidden bg-muted">
+                    <img
+                      src={c.image}
+                      alt={c.name}
+                      loading="lazy"
+                      className="h-full w-full object-cover transition-transform duration-500 group-hover/tab:scale-110"
+                    />
+                  </div>
+                  <span className={`whitespace-nowrap text-sm font-semibold ${activeId === c.id ? "text-brand" : ""}`}>
+                    {c.name}
+                  </span>
                 </div>
-                <span className={`whitespace-nowrap text-sm font-semibold ${activeId === c.id ? "text-brand" : ""}`}>
-                  {c.name}
-                </span>
-              </div>
-            </button>
-          ))}
+              </button>
+            ))}
+          </div>
         </div>
 
         <div
