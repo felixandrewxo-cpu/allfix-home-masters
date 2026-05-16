@@ -33,7 +33,7 @@ export const catalog: Category[] = [
   {
     id: "sofa",
     name: "Sofa Cleaning",
-    blurb: "Deep shampoo & sanitization for every sofa type.",
+    blurb: "Deep shampoo & sanitization for every sofa type.", image: sofaImg,
     items: [
       { id: "sofa-1", name: "Sofa Cleaning", description: "Per seat deep shampoo cleaning.", original: 500, price: 350, rating: 4.6 },
       { id: "sofa-7", name: "7 Seater Sofa Set Cleaning", description: "Complete 7-seater set deep clean.", original: 3500, price: 2450, rating: 4.9 },
@@ -46,7 +46,7 @@ export const catalog: Category[] = [
   {
     id: "chair",
     name: "Chair Cleaning",
-    blurb: "Dining & office chair deep cleaning packages.",
+    blurb: "Dining & office chair deep cleaning packages.", image: chairImg,
     items: [
       { id: "chair-4", name: "Chair Cleaning 4 Seats", description: "Set of 4 chairs deep cleaned.", original: 1400, price: 1200, rating: r() },
       { id: "chair-6", name: "Chair Cleaning 6 Seats", description: "Set of 6 chairs deep cleaned.", original: 2000, price: 1650, rating: r() },
@@ -58,7 +58,7 @@ export const catalog: Category[] = [
   {
     id: "carpet",
     name: "Carpet Cleaning",
-    blurb: "Deep carpet & rug shampoo, charged per sqft.",
+    blurb: "Deep carpet & rug shampoo, charged per sqft.", image: carpetImg,
     items: [
       { id: "carpet-1", name: "Carpet Cleaning", description: "Deep shampoo, stain removal.", original: 36, price: 20, rating: r(), unit: "/ SQFT" },
       { id: "rug-1", name: "Rug Cleaning", description: "Premium rug shampoo & care.", original: 44, price: 23, rating: r(), unit: "/ SQFT" },
@@ -67,7 +67,7 @@ export const catalog: Category[] = [
   {
     id: "curtain",
     name: "Curtain Cleaning",
-    blurb: "On-site curtain & blind washing.",
+    blurb: "On-site curtain & blind washing.", image: curtainImg,
     items: [
       { id: "curtain-1", name: "Curtain Cleaning", description: "On-site dry/wet curtain wash.", original: 1700, price: 1000, rating: r() },
       { id: "blind-1", name: "Blind Cleaning", description: "Detailed blind cleaning service.", original: 1500, price: 900, rating: r() },
@@ -76,7 +76,7 @@ export const catalog: Category[] = [
   {
     id: "mattress",
     name: "Bed / Mattress Cleaning",
-    blurb: "Sanitized mattress & bed deep cleaning.",
+    blurb: "Sanitized mattress & bed deep cleaning.", image: mattressImg,
     items: [
       { id: "mat-single", name: "Single Mattress Cleaning", description: "Single mattress deep clean.", original: 3100, price: 1650, rating: r() },
       { id: "mat-double", name: "Double Mattress Cleaning", description: "Double mattress deep clean.", original: 3700, price: 2000, rating: r() },
@@ -86,7 +86,7 @@ export const catalog: Category[] = [
   {
     id: "plastic-tank",
     name: "Plastic Water Tank Cleaning",
-    blurb: "Hygienic tank cleaning for safe water.",
+    blurb: "Hygienic tank cleaning for safe water.", image: plasticTankImg,
     items: [
       { id: "ptank-1", name: "150 – 300 Gallons", description: "Plastic tank, 150–300 gallons.", original: 2150, price: 1800, rating: r() },
       { id: "ptank-2", name: "350 – 500 Gallons", description: "Plastic tank, 350–500 gallons.", original: 2500, price: 2000, rating: r() },
@@ -96,7 +96,7 @@ export const catalog: Category[] = [
   {
     id: "cement-tank",
     name: "Cement Water Tank Cleaning",
-    blurb: "Roof-top & underground cement tank cleaning.",
+    blurb: "Roof-top & underground cement tank cleaning.", image: cementTankImg,
     items: [
       { id: "ctank-r1", name: "Roof Top Tank 3/5ft – 5/5ft", description: "Roof-top cement tank, small.", original: 3000, price: 2500, rating: r() },
       { id: "ctank-r2", name: "Roof Top Tank 6/6ft – 8/8ft", description: "Roof-top cement tank, medium.", original: 3500, price: 3000, rating: r() },
@@ -109,7 +109,7 @@ export const catalog: Category[] = [
   {
     id: "deep",
     name: "Deep Cleaning",
-    blurb: "Full house, room, kitchen & washroom deep cleaning.",
+    blurb: "Full house, room, kitchen & washroom deep cleaning.", image: deepImg,
     items: [
       { id: "deep-h1", name: "Full House Deep Cleaning (3–10 Marla)", description: "Per marla full house deep clean.", original: 700, price: 500, rating: r(), unit: "/ Marla" },
       { id: "deep-r1", name: "Room Deep Cleaning (3–10 Marla)", description: "Single room deep clean.", original: 4500, price: 2100, rating: r() },
@@ -124,7 +124,7 @@ export const catalog: Category[] = [
   {
     id: "solar",
     name: "Solar Panel Cleaning",
-    blurb: "Boost solar output with professional panel cleaning.",
+    blurb: "Boost solar output with professional panel cleaning.", image: solarImg,
     items: [
       { id: "solar-1", name: "3KW – 6KW", description: "Small residential solar systems.", original: 310, price: 290, rating: r(), unit: "/ KW" },
       { id: "solar-2", name: "7KW – 18KW", description: "Mid-size residential / commercial.", original: 220, price: 205, rating: r(), unit: "/ KW" },
