@@ -27,52 +27,52 @@ function ServiceCard({ item, categoryName, image }: { item: CatalogItem; categor
         )}
       </div>
       <div className="flex flex-col p-5 flex-1">
-      <div className="flex items-start gap-2">
-        <h4 className="text-base font-semibold leading-snug">{item.name}</h4>
-      </div>
-      {item.description && (
-        <p className="mt-1.5 text-sm text-muted-foreground leading-relaxed">{item.description}</p>
-      )}
-      <div className="mt-3 flex items-center gap-1.5 text-xs text-muted-foreground">
-        <Star className="h-3.5 w-3.5 fill-yellow-400 text-yellow-400" />
-        <span className="font-semibold text-foreground">{item.rating.toFixed(1)}</span>
-        <span>· Verified pros</span>
-      </div>
-
-      <div className="mt-4 flex items-end justify-between gap-3 pt-3 border-t border-border">
-        <div className="flex items-baseline gap-2 flex-wrap">
-          <span className="text-xs text-muted-foreground line-through">Rs {item.original.toLocaleString()}</span>
-          <span className="text-xl font-bold text-brand">Rs {item.price.toLocaleString()}</span>
-          {item.unit && <span className="text-[11px] text-muted-foreground">{item.unit}</span>}
+        <div className="flex items-start gap-2">
+          <h4 className="text-base font-semibold leading-snug line-clamp-2 min-h-[2.75rem]">{item.name}</h4>
         </div>
-        {line ? (
-          <div className="flex items-center gap-2 rounded-full border border-brand/30 bg-brand/5 p-1">
-            <button
-              onClick={() => dec(item.id)}
-              className="h-8 w-8 grid place-items-center rounded-full bg-background hover:bg-brand hover:text-brand-foreground transition"
-              aria-label="Decrease"
-            >
-              <Minus className="h-4 w-4" />
-            </button>
-            <span className="min-w-6 text-center font-bold text-brand">{line.qty}</span>
-            <button
-              onClick={() => inc(item.id)}
-              className="h-8 w-8 grid place-items-center rounded-full bg-brand text-brand-foreground hover:scale-110 transition"
-              aria-label="Increase"
-            >
-              <Plus className="h-4 w-4" />
-            </button>
-          </div>
-        ) : (
-          <Button
-            size="sm"
-            onClick={() => add(item, categoryName)}
-            className="rounded-full bg-brand hover:bg-brand text-brand-foreground font-semibold shadow-glow hover:scale-105 transition-transform"
-          >
-            <ShoppingCart className="h-4 w-4 mr-1" /> Add
-          </Button>
+        {item.description && (
+          <p className="mt-1.5 text-sm text-muted-foreground leading-relaxed line-clamp-2">{item.description}</p>
         )}
-      </div>
+        <div className="mt-3 flex items-center gap-1.5 text-xs text-muted-foreground">
+          <Star className="h-3.5 w-3.5 fill-yellow-400 text-yellow-400" />
+          <span className="font-semibold text-foreground">{item.rating.toFixed(1)}</span>
+          <span>· Verified pros</span>
+        </div>
+
+        <div className="mt-auto pt-4 flex items-center justify-between gap-3 border-t border-border">
+          <div className="flex flex-col">
+            <span className="text-xs text-muted-foreground line-through leading-tight">Rs {item.original.toLocaleString()}</span>
+            <span className="text-xl font-bold text-brand leading-tight">Rs {item.price.toLocaleString()}</span>
+            {item.unit && <span className="text-[11px] text-muted-foreground leading-tight">{item.unit}</span>}
+          </div>
+          {line ? (
+            <div className="flex items-center gap-2 rounded-full border border-brand/30 bg-brand/5 p-1 shrink-0">
+              <button
+                onClick={() => dec(item.id)}
+                className="h-8 w-8 grid place-items-center rounded-full bg-background hover:bg-brand hover:text-brand-foreground transition"
+                aria-label="Decrease"
+              >
+                <Minus className="h-4 w-4" />
+              </button>
+              <span className="min-w-6 text-center font-bold text-brand">{line.qty}</span>
+              <button
+                onClick={() => inc(item.id)}
+                className="h-8 w-8 grid place-items-center rounded-full bg-brand text-brand-foreground hover:scale-110 transition"
+                aria-label="Increase"
+              >
+                <Plus className="h-4 w-4" />
+              </button>
+            </div>
+          ) : (
+            <Button
+              size="sm"
+              onClick={() => add(item, categoryName)}
+              className="rounded-full bg-brand hover:bg-brand text-brand-foreground font-semibold shadow-glow hover:scale-105 transition-transform shrink-0"
+            >
+              <ShoppingCart className="h-4 w-4 mr-1" /> Add
+            </Button>
+          )}
+        </div>
       </div>
     </div>
   );
@@ -97,32 +97,37 @@ export function CleaningCatalog() {
           </p>
         </div>
 
-        <div className="flex gap-3 overflow-x-auto pb-3 mb-10 -mx-4 px-4 lg:justify-center scrollbar-thin">
-          {catalog.map((c) => (
-            <button
-              key={c.id}
-              onClick={() => setActiveId(c.id)}
-              className={`group/tab relative shrink-0 overflow-hidden rounded-2xl border transition-all ${
-                activeId === c.id
-                  ? "border-brand shadow-glow scale-[1.03]"
-                  : "border-border hover:border-brand/40"
-              }`}
-            >
-              <div className="flex items-center gap-3 pr-4">
-                <div className="h-14 w-14 overflow-hidden bg-muted">
-                  <img
-                    src={c.image}
-                    alt={c.name}
-                    loading="lazy"
-                    className="h-full w-full object-cover transition-transform duration-500 group-hover/tab:scale-110"
-                  />
+        <div className="-mx-4 lg:mx-0 mb-10">
+          <div
+            className="flex gap-3 overflow-x-auto px-4 lg:px-1 py-2 scrollbar-thin snap-x snap-mandatory lg:flex-wrap lg:justify-center lg:overflow-visible"
+            style={{ scrollPaddingLeft: "1rem", scrollPaddingRight: "1rem" }}
+          >
+            {catalog.map((c) => (
+              <button
+                key={c.id}
+                onClick={() => setActiveId(c.id)}
+                className={`group/tab relative shrink-0 snap-start overflow-hidden rounded-2xl border transition-all ${
+                  activeId === c.id
+                    ? "border-brand shadow-glow scale-[1.02]"
+                    : "border-border hover:border-brand/40"
+                }`}
+              >
+                <div className="flex items-center gap-3 pr-4">
+                  <div className="h-14 w-14 shrink-0 overflow-hidden bg-muted">
+                    <img
+                      src={c.image}
+                      alt={c.name}
+                      loading="lazy"
+                      className="h-full w-full object-cover transition-transform duration-500 group-hover/tab:scale-110"
+                    />
+                  </div>
+                  <span className={`whitespace-nowrap text-sm font-semibold ${activeId === c.id ? "text-brand" : ""}`}>
+                    {c.name}
+                  </span>
                 </div>
-                <span className={`whitespace-nowrap text-sm font-semibold ${activeId === c.id ? "text-brand" : ""}`}>
-                  {c.name}
-                </span>
-              </div>
-            </button>
-          ))}
+              </button>
+            ))}
+          </div>
         </div>
 
         <div
