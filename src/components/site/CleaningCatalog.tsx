@@ -4,19 +4,30 @@ import { Button } from "@/components/ui/button";
 import { catalog, type CatalogItem } from "./cart/catalog";
 import { useCart } from "./cart/CartContext";
 
-function ServiceCard({ item, categoryName }: { item: CatalogItem; categoryName: string }) {
+function ServiceCard({ item, categoryName, image }: { item: CatalogItem; categoryName: string; image: string }) {
   const { items, add, inc, dec } = useCart();
   const line = items.find((i) => i.id === item.id);
   const off = Math.round(((item.original - item.price) / item.original) * 100);
 
   return (
-    <div className="card-hover group relative flex flex-col rounded-2xl border border-border bg-card p-5 animate-fade-up">
-      {off > 0 && (
-        <span className="absolute top-3 right-3 inline-flex items-center rounded-full bg-brand/10 text-brand text-[11px] font-bold px-2 py-1">
-          {off}% OFF
-        </span>
-      )}
-      <div className="flex items-start gap-2 pr-14">
+    <div className="card-hover group relative flex flex-col overflow-hidden rounded-2xl border border-border bg-card animate-fade-up">
+      <div className="relative h-40 overflow-hidden bg-muted">
+        <img
+          src={image}
+          alt={item.name}
+          loading="lazy"
+          width={800}
+          height={512}
+          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+        />
+        {off > 0 && (
+          <span className="absolute top-3 right-3 inline-flex items-center rounded-full bg-brand text-brand-foreground text-[11px] font-bold px-2.5 py-1 shadow-glow">
+            {off}% OFF
+          </span>
+        )}
+      </div>
+      <div className="flex flex-col p-5 flex-1">
+      <div className="flex items-start gap-2">
         <h4 className="text-base font-semibold leading-snug">{item.name}</h4>
       </div>
       {item.description && (
@@ -62,6 +73,7 @@ function ServiceCard({ item, categoryName }: { item: CatalogItem; categoryName: 
           </Button>
         )}
       </div>
+      </div>
     </div>
   );
 }
@@ -85,30 +97,54 @@ export function CleaningCatalog() {
           </p>
         </div>
 
-        <div className="flex gap-2 overflow-x-auto pb-3 mb-8 -mx-4 px-4 lg:justify-center scrollbar-thin">
+        <div className="flex gap-3 overflow-x-auto pb-3 mb-10 -mx-4 px-4 lg:justify-center scrollbar-thin">
           {catalog.map((c) => (
             <button
               key={c.id}
               onClick={() => setActiveId(c.id)}
-              className={`whitespace-nowrap rounded-full border px-5 py-2.5 text-sm font-semibold transition-all ${
+              className={`group/tab relative shrink-0 overflow-hidden rounded-2xl border transition-all ${
                 activeId === c.id
-                  ? "bg-brand text-brand-foreground border-brand shadow-glow scale-105"
-                  : "bg-card border-border hover:border-brand/40 hover:text-brand"
+                  ? "border-brand shadow-glow scale-[1.03]"
+                  : "border-border hover:border-brand/40"
               }`}
             >
-              {c.name}
+              <div className="flex items-center gap-3 pr-4">
+                <div className="h-14 w-14 overflow-hidden bg-muted">
+                  <img
+                    src={c.image}
+                    alt={c.name}
+                    loading="lazy"
+                    className="h-full w-full object-cover transition-transform duration-500 group-hover/tab:scale-110"
+                  />
+                </div>
+                <span className={`whitespace-nowrap text-sm font-semibold ${activeId === c.id ? "text-brand" : ""}`}>
+                  {c.name}
+                </span>
+              </div>
             </button>
           ))}
         </div>
 
-        <div className="text-center mb-8 animate-fade-in" key={active.id}>
-          <h3 className="text-2xl font-bold">{active.name}</h3>
-          <p className="text-muted-foreground mt-1">{active.blurb}</p>
+        <div
+          key={active.id + "-banner"}
+          className="relative mb-8 overflow-hidden rounded-3xl border border-border animate-fade-in"
+        >
+          <img
+            src={active.image}
+            alt={active.name}
+            loading="lazy"
+            className="h-48 md:h-56 w-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-background/95 via-background/60 to-transparent" />
+          <div className="absolute inset-0 flex flex-col justify-center px-6 md:px-10">
+            <h3 className="text-2xl md:text-3xl font-bold">{active.name}</h3>
+            <p className="text-muted-foreground mt-1 max-w-md">{active.blurb}</p>
+          </div>
         </div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5" key={active.id + "-grid"}>
           {active.items.map((item) => (
-            <ServiceCard key={item.id} item={item} categoryName={active.name} />
+            <ServiceCard key={item.id} item={item} categoryName={active.name} image={active.image} />
           ))}
         </div>
       </div>
