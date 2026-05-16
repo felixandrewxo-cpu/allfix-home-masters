@@ -41,7 +41,7 @@ function Index() {
         <Header />
         <main>
           <Hero />
-          <Services />
+          
           <CleaningCatalog />
           <About />
           <Reviews />
