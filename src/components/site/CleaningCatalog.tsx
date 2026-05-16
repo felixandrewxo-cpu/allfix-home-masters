@@ -4,19 +4,30 @@ import { Button } from "@/components/ui/button";
 import { catalog, type CatalogItem } from "./cart/catalog";
 import { useCart } from "./cart/CartContext";
 
-function ServiceCard({ item, categoryName }: { item: CatalogItem; categoryName: string }) {
+function ServiceCard({ item, categoryName, image }: { item: CatalogItem; categoryName: string; image: string }) {
   const { items, add, inc, dec } = useCart();
   const line = items.find((i) => i.id === item.id);
   const off = Math.round(((item.original - item.price) / item.original) * 100);
 
   return (
-    <div className="card-hover group relative flex flex-col rounded-2xl border border-border bg-card p-5 animate-fade-up">
-      {off > 0 && (
-        <span className="absolute top-3 right-3 inline-flex items-center rounded-full bg-brand/10 text-brand text-[11px] font-bold px-2 py-1">
-          {off}% OFF
-        </span>
-      )}
-      <div className="flex items-start gap-2 pr-14">
+    <div className="card-hover group relative flex flex-col overflow-hidden rounded-2xl border border-border bg-card animate-fade-up">
+      <div className="relative h-40 overflow-hidden bg-muted">
+        <img
+          src={image}
+          alt={item.name}
+          loading="lazy"
+          width={800}
+          height={512}
+          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+        />
+        {off > 0 && (
+          <span className="absolute top-3 right-3 inline-flex items-center rounded-full bg-brand text-brand-foreground text-[11px] font-bold px-2.5 py-1 shadow-glow">
+            {off}% OFF
+          </span>
+        )}
+      </div>
+      <div className="flex flex-col p-5 flex-1">
+      <div className="flex items-start gap-2">
         <h4 className="text-base font-semibold leading-snug">{item.name}</h4>
       </div>
       {item.description && (
