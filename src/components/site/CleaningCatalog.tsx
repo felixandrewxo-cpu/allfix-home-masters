@@ -73,6 +73,7 @@ function ServiceCard({ item, categoryName, image }: { item: CatalogItem; categor
           </Button>
         )}
       </div>
+      </div>
     </div>
   );
 }
@@ -96,30 +97,54 @@ export function CleaningCatalog() {
           </p>
         </div>
 
-        <div className="flex gap-2 overflow-x-auto pb-3 mb-8 -mx-4 px-4 lg:justify-center scrollbar-thin">
+        <div className="flex gap-3 overflow-x-auto pb-3 mb-10 -mx-4 px-4 lg:justify-center scrollbar-thin">
           {catalog.map((c) => (
             <button
               key={c.id}
               onClick={() => setActiveId(c.id)}
-              className={`whitespace-nowrap rounded-full border px-5 py-2.5 text-sm font-semibold transition-all ${
+              className={`group/tab relative shrink-0 overflow-hidden rounded-2xl border transition-all ${
                 activeId === c.id
-                  ? "bg-brand text-brand-foreground border-brand shadow-glow scale-105"
-                  : "bg-card border-border hover:border-brand/40 hover:text-brand"
+                  ? "border-brand shadow-glow scale-[1.03]"
+                  : "border-border hover:border-brand/40"
               }`}
             >
-              {c.name}
+              <div className="flex items-center gap-3 pr-4">
+                <div className="h-14 w-14 overflow-hidden bg-muted">
+                  <img
+                    src={c.image}
+                    alt={c.name}
+                    loading="lazy"
+                    className="h-full w-full object-cover transition-transform duration-500 group-hover/tab:scale-110"
+                  />
+                </div>
+                <span className={`whitespace-nowrap text-sm font-semibold ${activeId === c.id ? "text-brand" : ""}`}>
+                  {c.name}
+                </span>
+              </div>
             </button>
           ))}
         </div>
 
-        <div className="text-center mb-8 animate-fade-in" key={active.id}>
-          <h3 className="text-2xl font-bold">{active.name}</h3>
-          <p className="text-muted-foreground mt-1">{active.blurb}</p>
+        <div
+          key={active.id + "-banner"}
+          className="relative mb-8 overflow-hidden rounded-3xl border border-border animate-fade-in"
+        >
+          <img
+            src={active.image}
+            alt={active.name}
+            loading="lazy"
+            className="h-48 md:h-56 w-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-background/95 via-background/60 to-transparent" />
+          <div className="absolute inset-0 flex flex-col justify-center px-6 md:px-10">
+            <h3 className="text-2xl md:text-3xl font-bold">{active.name}</h3>
+            <p className="text-muted-foreground mt-1 max-w-md">{active.blurb}</p>
+          </div>
         </div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5" key={active.id + "-grid"}>
           {active.items.map((item) => (
-            <ServiceCard key={item.id} item={item} categoryName={active.name} />
+            <ServiceCard key={item.id} item={item} categoryName={active.name} image={active.image} />
           ))}
         </div>
       </div>
